@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'https://patient-registration-backend.herokuapp.com/',
+    baseURL: 'http://localhost:10000/',
 });
 
 export default API;

@@ -7,7 +7,8 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
-	"io/ioutil"
+    "io/ioutil"
+    "github.com/rs/cors"
 )
 
 type User struct {
@@ -50,18 +51,20 @@ func getPort() string {
     if p != "" {
         return ":" + p
     }
-    return ":3000"
+    return ":10000"
 }
 
 func handleRequests() {
-	myRouter := mux.NewRouter().StrictSlash(true)
 
+    myRouter := mux.NewRouter().StrictSlash(true)
+    
     myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/users", returnAllUsers)
     myRouter.HandleFunc("/user", createNewUser).Methods("POST")
     port := getPort()
 
-    log.Fatal(http.ListenAndServe(port, myRouter))
+    handler := cors.Default().Handler(myRouter)
+    log.Fatal(http.ListenAndServe(port, handler))
 }
 
 
