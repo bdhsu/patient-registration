@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Image, Link, Button, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import Table from 'rc-table';
 

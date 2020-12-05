@@ -2,12 +2,19 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useStateMachine } from 'little-state-machine';
 import { useHistory } from 'react-router-dom';
-import { Button, Text, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import {
+    Button,
+    Text,
+    // FormControl, FormLabel, Input
+} from '@chakra-ui/react';
 import updateAction from 'updateAction';
 
 const Step2 = props => {
     const { state, action } = useStateMachine(updateAction);
-    const { register, handleSubmit } = useForm({
+    const {
+        // register,
+        handleSubmit,
+    } = useForm({
         defaultValues: state.register,
     });
     const { push } = useHistory();
