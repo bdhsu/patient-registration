@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useStateMachine } from 'little-state-machine';
 import { useHistory } from 'react-router-dom';
 import { Button, Text, FormControl, FormLabel, Input } from '@chakra-ui/react';
-import updateAction from 'updateAction';
+import updateAction from 'utils/updateAction';
 
+// Step 0 - enter user account information
 const Step0 = props => {
     const { state, action } = useStateMachine(updateAction);
     const { register, handleSubmit } = useForm({

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStateMachine } from 'little-state-machine';
 import { Text } from '@chakra-ui/react';
-import updateAction from 'updateAction';
 
+import updateAction from 'utils/updateAction';
+
+// Success page
 const Complete = props => {
     const { state } = useStateMachine(updateAction);
 

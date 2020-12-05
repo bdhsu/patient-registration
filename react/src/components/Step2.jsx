@@ -7,8 +7,9 @@ import {
     Text,
     // FormControl, FormLabel, Input
 } from '@chakra-ui/react';
-import updateAction from 'updateAction';
+import updateAction from 'utils/updateAction';
 
+// Step 2 - Upload drivers license. This step is currently disabled.
 const Step2 = props => {
     const { state, action } = useStateMachine(updateAction);
     const {

@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { StateMachineProvider, createStore } from 'little-state-machine';
 
 import App from './App';
-import theme from 'theme';
+import theme from 'utils/theme';
 
 // Store for mult-step registration data
 createStore({

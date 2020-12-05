@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"io/ioutil"
 )
 
 type User struct {
@@ -34,8 +35,13 @@ func returnAllUsers(w http.ResponseWriter, r *http.Request){
 }
 
 func createNewUser(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Endpoint Hit: createNewUser")
 	reqBody, _ := ioutil.ReadAll(r.Body)
-    fmt.Fprintf(w, "%+v", string(reqBody))
+	var user User
+	json.Unmarshal(reqBody, &user)
+	Users = append(Users, user)
+
+	json.NewEncoder(w).Encode(user)
 }
 
 func handleRequests() {
@@ -43,7 +49,7 @@ func handleRequests() {
 
     myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/users", returnAllUsers)
-	myRouter.HandleFunc("/users", createNewUser).Methods("POST")
+	myRouter.HandleFunc("/user", createNewUser).Methods("POST")
     log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 

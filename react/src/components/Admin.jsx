@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import Table from 'rc-table';
 
+import 'utils/API';
 import 'components/Admin.css';
+import API from 'utils/API';
 
 const columns = [
     {
@@ -62,110 +64,120 @@ const columns = [
     },
 ];
 
-const data = [
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-    {
-        name: 'Jack Harlow',
-        email: 'jack@gmail.com',
-        phone: '1234567890',
-        dateOfBirth: '00/00/0000',
-        streetAddress: '1 Infinite Loop',
-        city: 'Cupertino',
-        state: 'CA',
-        zipcode: '95014',
-    },
-];
+// Harcoded table data
+// const data = [
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+//     {
+//         name: 'Jack Harlow',
+//         email: 'jack@gmail.com',
+//         phone: '1234567890',
+//         dateOfBirth: '00/00/0000',
+//         streetAddress: '1 Infinite Loop',
+//         city: 'Cupertino',
+//         state: 'CA',
+//         zipcode: '95014',
+//     },
+// ];
 
 function Admin() {
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        API.get('users').then(res => {
+            console.log(res.data);
+            setData(res.data);
+        });
+    });
+
     return (
         <Flex>
             <Flex bg="#1D1B26" w="250px" h="100vh" direction="column" align="center">
@@ -182,7 +194,7 @@ function Admin() {
             </Flex>
             <Box pl={10} pt={5}>
                 <Text fontSize="3xl">Manage Users</Text>
-                <Box as={Table} columns={columns} data={data} mt={5} />
+                {data && <Box as={Table} columns={columns} data={data} mt={5} />}
             </Box>
         </Flex>
     );
