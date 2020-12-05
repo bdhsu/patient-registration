@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStateMachine } from 'little-state-machine';
 import { Text } from '@chakra-ui/react';
 
