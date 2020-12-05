@@ -50,7 +50,7 @@ func getPort() string {
     if p != "" {
         return ":" + p
     }
-    return ":g"
+    return ":3000"
 }
 
 func handleRequests() {
