@@ -1,6 +1,7 @@
 package main
 
 import (
+    "os"
 	"fmt"
     "log"
 	"net/http"
@@ -44,14 +45,25 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(user)
 }
 
+func getPort() string {
+    p := os.Getenv("PORT")
+    if p != "" {
+        return ":" + p
+    }
+    return ":g"
+}
+
 func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
     myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/users", returnAllUsers)
-	myRouter.HandleFunc("/user", createNewUser).Methods("POST")
-    log.Fatal(http.ListenAndServe(":10000", myRouter))
+    myRouter.HandleFunc("/user", createNewUser).Methods("POST")
+    port := getPort()
+
+    log.Fatal(http.ListenAndServe(port, myRouter))
 }
+
 
 func main() {
 	Users = []User{
